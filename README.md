@@ -1,5 +1,10 @@
-# Spotify-Node-Server-Final-Project-CS-4220
+# Spotify Node Server Final Project (CS-4220)
 
-haha funny commit
+# Description
+*Put info here*
 
-johny smells
+# How to view the list of available commands
+*Put info here*
+
+# Example commands
+*Put info here*
