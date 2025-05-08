@@ -1,8 +1,21 @@
 {
+  "name": "spotify-node-server-application",
+  "version": "1.0.0",
+  "description": "A Node.js server application for searching Spotify artists and logging search history using MongoDB.",
+  "author": "Spotify",
+  "contributors": [
+    "Keyvan Mahmoodzadeh Kani",
+    "MD Islam",
+    "Johnny Vu",
+    "Sanskar Thapa",
+    "Jorge Arias",
+    "Anthony Gonzalez"
+  ],
   "type": "module",
   "dependencies": {
     "axios": "^1.8.4",
     "dotenv": "^16.4.7",
+    "express": "^5.1.0",
     "inquirer": "^12.5.0",
     "mongodb": "^6.16.0",
     "qs": "^6.14.0",

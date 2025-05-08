@@ -79,7 +79,7 @@ export const searchByName = async (name) => {
         const accessToken = await getToken();
         const searchURL = 'https://api.spotify.com/v1/search';
         const response = await axios.get(
-            `${searchURL}?q=${encodeURIComponent(name)}&type=album,artist,audiobook,track`, {
+            `${searchURL}?q=${encodeURIComponent(name)}&type=artist`, {
                 params: { limit: 10 ,market: 'US' },
                 headers: {
                     'Authorization': 'Bearer ' + accessToken,
