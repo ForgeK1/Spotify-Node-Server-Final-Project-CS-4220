@@ -10,7 +10,7 @@ Contributors:
 import express from 'express';
 import dotenv from 'dotenv';
 import db from './services/db.js'; //Imports the export functions to connect to MongoDB
-import artistRouter from './routes/artist.js';
+import artistRouters from './routes/artist.js';
 
 //A test function to see if the database connection is working
 export const runServer = async() => 
@@ -31,8 +31,8 @@ export const runServer = async() =>
         //Middleware to parse JSON
         app.use(express.json());
 
-        //Mount /artist route
-        app.use('/artist', artistRouter);
+        //Mount the artist routes
+        app.use('/artist', artistRouters);
 
         //Assigns the server variable and starts the server itself
         server = app.listen(PORT, () => 
