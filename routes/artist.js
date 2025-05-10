@@ -55,16 +55,38 @@ router.get('/', async(req, res) =>
     }
 });
 
-/*A router that ...
+/* A router that retrieves artist details using their Spotify ID,
+   logs the selection into the database, and returns the full artist object
 
     Examples: 
-        ...
-        ...
-        ...*/
-// router.get(':id', async(req, res) => 
-// {
+        GET /artist/3TVXtAsR1Inumwj472S9r4  (Drake)
+        GET /artist/2YZyLoL8N0Wb9xBt1NhZWg  (Kendrick Lamar)
+        GET /artist/0du5cEVh5yTK9QJze8zA0C  (Bruno Mars) */
+router.get(':id', async(req, res) => {
 
-// }
+    try {
+        // Extracts the artist ID from the route parameters
+        const { id } = req.params;
+
+        // Fetches full artist details from Spotify API
+        const artistDetails = await getByID(id);
+
+        // Creates a simplified log entry
+        const logEntry = {
+            display: artistDetails.name,
+            identifier: artistDetails.id
+        };
+
+        // Inserts the selection into the SelectionHistory collection in the database
+        db.insert('SelectionHistory', logEntry);
+
+        // Returns the full artist details
+        return res.json(artistDetails);
+    } catch(err) {
+        res.status(500).json({ err });
+    }
+
+});
 
 //Exports the router to utilize its handlers
 export default router;
