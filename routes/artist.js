@@ -62,14 +62,14 @@ router.get('/', async(req, res) =>
         GET /artist/3TVXtAsR1Inumwj472S9r4  (Drake)
         GET /artist/2YZyLoL8N0Wb9xBt1NhZWg  (Kendrick Lamar)
         GET /artist/0du5cEVh5yTK9QJze8zA0C  (Bruno Mars) */
-router.get(':id', async(req, res) => {
+router.get('/:id', async(req, res) => {
 
     try {
         // Extracts the artist ID from the route parameters
         const { id } = req.params;
 
         // Fetches full artist details from Spotify API
-        const artistDetails = await getByID(id);
+        const artistDetails = await getByID('artist', id);
 
         // Creates a simplified log entry
         const logEntry = {
