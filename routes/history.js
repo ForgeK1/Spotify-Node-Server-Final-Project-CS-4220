@@ -10,50 +10,72 @@ Contributors:
     - Sanskar Thapa
 */
 
-import express from 'express';
-import db from '../services/db.js';
+import express from "express";
+import db from "../services/db.js";
 
 //uses express router to define and handle routes
 const router = express.Router();
 
-router.get('/keywords', async (req, res) => {
-    try {
+router.get("/keywords", async (req, res) => {
+  try {
+    //list to return results
+    let results = [];
+    //looks in the database for any 'SearchHistoryKeywords' tables
+    const dbFindings = await db.find("SearchHistoryKeyword");
 
-        //list to return results
-        let results = [];
-        //looks in the database for any 'SearchHistoryKeywords' tables
-        const dbFindings = await db.find('SearchHistoryKeyword')
+    //checks if the table exists
+    if (dbFindings) {
+      //converts all the raw json into a list
+      const keywordHistory = await dbFindings.toArray();
 
-        //checks if the table exists
-        if (dbFindings) {
-            //converts all the raw json into a list
-            const keywordHistory = await dbFindings.toArray();
+      //checks every keyword in the history found in the database
+      for (let i = 0; i < keywordHistory.length; i++) {
+        const currentKey = keywordHistory[i];
 
-            //checks every keyword in the history found in the database
-            for (let i = 0; i < keywordHistory.length; i++) {
-                const currentKey = keywordHistory[i];
-
-                //pushes formatted json the to results array
-                results.push({
-                    display: currentKey.display,
-                    identifier: currentKey.identifier
-                })
-            }
-
-        }
-
-        return res.json(results);
-
+        //pushes formatted json the to results array
+        results.push({
+          display: currentKey.display,
+          identifier: currentKey.identifier,
+        });
+      }
     }
+
+    return res.json(results);
+  } catch (err) {
     //Displays any potential errors when grabbing and saving the artist info
-    catch (err) {
-        res.status(500).json({ err });
-    }
+    res.status(500).json({ err });
+  }
 });
 
-//I alr set it up, just add the functions n' stuff my glorious king sanskar
-router.get('/selections', async (req, res) => {
+router.get("/selections", async (req, res) => {
+  try {
+    //list to return results
+    let results = [];
+    //looks in the database for any 'SelectionHistory' tables
+    const dbFindings = await db.find("SelectionHistory");
 
+    //checks if the table exists
+    if (dbFindings) {
+      //converts all the raw json into a list
+      const keywordHistory = await dbFindings.toArray();
+
+      //checks every keyword in the history found in the database
+      for (let i = 0; i < keywordHistory.length; i++) {
+        const currentKey = keywordHistory[i];
+
+        //pushes formatted json the to results array
+        results.push({
+          display: currentKey.display,
+          identifier: currentKey.identifier,
+        });
+      }
+    }
+
+    return res.json(results);
+  } catch (err) {
+    //Displays any potential errors when grabbing and saving the artist info
+    res.status(500).json({ err });
+  }
 });
 
 //Exports the router to utilize its handlers
