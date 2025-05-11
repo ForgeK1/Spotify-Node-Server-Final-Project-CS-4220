@@ -1,6 +1,9 @@
 /*
 Class Description: 
-    - 
+    - This class handles artist-related routes for the Spotify Node.js server, which allow users to 
+      search for an artist by name using GET /artist or retrieve further detailed information by ID  
+      using GET /artist/:id. Each request logs the interaction in a clean format to MongoDB in    
+      either the SearchHistoryKeyword or SelectionHistory collection.
 
 Contributors: 
     - Keyvan M. Kani
@@ -44,8 +47,7 @@ router.get('/', async(req, res) =>
         //Saves the artist info under the SearchHistoryKeyword collection in the Spotify database
         db.insert('SearchHistoryKeyword', results);
 
-        /*Returns the artist information (this line can be removed if showcasing the results
-          is unnecessary)*/
+        /*Returns the artist information*/
         return res.json(results);
     }
     //Displays any potential errors when grabbing and saving the artist info
