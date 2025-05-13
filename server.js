@@ -1,6 +1,7 @@
 /*
 Class Description: 
-    - 
+    Sets up the connections/routes that the api utilizes and have the database listen to the incoming data.
+    We also have the 2 different ways to sutdown the connection: manual interupption and connection termination
 
 Contributors: 
     - Jorge Arias
